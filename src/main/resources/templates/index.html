@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>
+    Client list:
+</p>
+<ul th:each="client: ${clients}">
+    <li th:text="${client.id}" />
+    <li th:text="${client.cardNumber}" />
+    <li th:text="${client.cardSales}" />
+    <ul th:each="transaction: ${client.transactions}">
+        <li th:text="${transaction.id}" />
+        <li th:text="${transaction.startDate}" />
+    </ul>
+</ul>
+
+<form action="#" th:action="@{/clients}" th:object="${client}" method="post">
+    <label for="cardNumber">Card Number</label>
+    <input type="text" th:field="*{cardNumber}" id="cardNumber" placeholder="Card Number">
+    <span th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></span>
+    <label for="cardSales">Card Sales</label>
+    <input type="text" th:field="*{cardSales}" id="cardSales" placeholder="Card Sales">
+    <span th:if="${#fields.hasErrors('cardSales')}" th:errors="*{cardSales}"></span>
+    <input type="submit" value="Add Client">
+</form>
+
+
+
+</body>
+</html>
