@@ -19,7 +19,7 @@
 </ul>
 
 <form action="#" th:action="@{/clients}" th:object="${client}" method="post">
-    <label for="cardNumber">Card Numberrr</label>
+    <label for="cardNumber">Card Number</label>
     <input type="text" th:field="*{cardNumber}" id="cardNumber" placeholder="Card Number">
     <span th:if="${#fields.hasErrors('cardNumber')}" th:errors="*{cardNumber}"></span>
     <label for="cardSales">Card Sales</label>
@@ -27,7 +27,6 @@
     <span th:if="${#fields.hasErrors('cardSales')}" th:errors="*{cardSales}"></span>
     <input type="submit" value="Add Client">
 </form>
-
 
 
 </body>

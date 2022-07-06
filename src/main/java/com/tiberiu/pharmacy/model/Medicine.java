@@ -48,6 +48,10 @@ public class Medicine {
         return producer;
     }
 
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
     public void setProducer(String producer) {
         this.producer = producer;
     }

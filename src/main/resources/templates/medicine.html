@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <form action="#" th:action="@{/medicines}" th:object="${medicine}" method="post">
+        <input type="hidden" th:field="*{id}" id="id">
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Medicine Name</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{name}" id="name" placeholder="Medicine Name" class="form-control">
+                <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="producer" class="col-sm-2 col-form-label">Producer</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{producer}" id="producer" placeholder="Producer" class="form-control">
+                <span th:if="${#fields.hasErrors('producer')}" th:errors="*{producer}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="price" class="col-sm-2 col-form-label">Price</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{price}" id="price" placeholder="Price" class="form-control">
+                <span th:if="${#fields.hasErrors('price')}" th:errors="*{price}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="pieces" class="col-sm-2 col-form-label">Pieces</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{pieces}" id="pieces" placeholder="Pieces" class="form-control">
+                <span th:if="${#fields.hasErrors('pieces')}" th:errors="*{pieces}"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="sales" class="col-sm-2 col-form-label">Sales</label>
+            <div class="col-sm-10">
+                <input type="text" th:field="*{sales}" id="sales" placeholder="Sales" class="form-control">
+                <span th:if="${#fields.hasErrors('sales')}" th:errors="*{sales}"></span>
+            </div>
+        </div>
+        <fieldset class="form-group">
+            <div class="row">
+                <legend class="col-form-label col-sm-2 pt-0">Requires receipt</legend>
+                <div class="col-sm-10">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" th:field="*{requiresRecep}" value="" id="requiresRecep">
+                        <label class="form-check-label" for="requiresRecep">
+                            Yes or No
+                        </label>
+                        <span th:if="${#fields.hasErrors('requiresRecep')}" th:errors="*{requiresRecep}"></span>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+        <input type="submit" value="Add Medicine" class="btn btn-primary">
+    </form>
+
+    <br>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-10 mt-5 mb-5">
+                <table class="table table-bordered table-dark" style="width: 90%">
+                    <caption>Pharmacy Medicines</caption>
+                    <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Producer</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Requires Receipt</th>
+                        <th scope="col">Pieces</th>
+                        <th scope="col">Sales</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="medicine : ${medicines}">
+                        <td th:text="${medicine.id}">ID</td>
+                        <td th:text="${medicine.name}">Name</td>
+                        <td th:text="${medicine.producer}">Producer</td>
+                        <td th:text="${medicine.price}">Price</td>
+                        <td>
+                            <span th:if="${medicine.requiresRecep}">Yes</span>
+                            <span th:unless="${medicine.requiresRecep}">No</span>
+                        </td>
+                        <td th:text="${medicine.pieces}">Pieces</td>
+                        <td th:text="${medicine.sales}">Sales</td>
+                        <td>
+                            <a th:href="@{'/medicines/'+ ${medicine.id}}">
+                                Edit
+                            </a>
+                            <a th:href="@{'/medicines/delete/'+ ${medicine.id}}">
+                                Delete
+                            </a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+            integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+            crossorigin="anonymous"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.4.1/cjs/popper.min.js"
+            integrity="sha256-T3bYsIPyOLpEfeZOX4M7J59ZoDMzuYFUsPiSN3Xcc2M=" crossorigin="anonymous"></script>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"
+            integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+            crossorigin="anonymous"></script>
+
+</div>
+</body>
+</html>
